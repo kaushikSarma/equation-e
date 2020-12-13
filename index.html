@@ -1,0 +1,155 @@
+<html>
+
+<head>
+	<title>n vs H</title>
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			font-size: 1.2rem;
+		}
+
+		body {
+			font-family: 'Courier New', Courier, monospace;
+		}
+
+		main {
+			display: flex;
+			width: 100vw;
+			height: 100vh;
+			font-size: 2em;
+		}
+
+		/* Chrome, Safari, Edge, Opera */
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		/* Firefox */
+		input[type=number] {
+			-moz-appearance: textfield;
+		}
+
+		table {
+			border-spacing: 0;
+			margin: 100 auto;
+		}
+
+		input,
+		input:focus {
+			text-align: center;
+			border: none;
+			outline: none;
+			border-bottom: 2px dashed green;
+			padding-bottom: 5px;
+			padding-top: 5px;
+			background: rgba(150, 250, 250, 0.2);
+		}
+
+		input {
+			min-width: 50px;
+		}
+
+		td {
+			text-align: center;
+			padding: 10px;
+		}
+
+		.hidden {
+			opacity: 0;
+		}
+
+		.left {
+			text-align: right;
+		}
+
+		.underline {
+			border-bottom: 1px solid grey;
+		}
+	</style>
+
+</head>
+
+<body>
+	<main>
+		<table>
+			<div>
+				<!-- formula -->
+				<tr>
+					<td class="left" rowspan=2>E =&nbsp;&nbsp;</td>
+					<td class="underline">n<sup>2</sup>h<sup>2</sup></td>
+				</tr>
+				<tr>
+					<td>8m<sub>e</sub>L<sup>2</sup></td>
+				</tr>
+			</div>
+			<div>
+				<!-- add inputs here -->
+				<tr>
+					<td class="left" rowspan=2> =&nbsp;&nbsp;</td>
+					<td class="underline">
+						<input id="inputN" type="number" step="1" placeholder="n" min=1 value=1 /><sup> 2</sup> &times;
+						(<input id="inputH" placeholder="h" type="number" step="any" value="6.6261" /> &times;
+						10<sup>-34</sup>cm<sup>2</sup>gs<sup>-1</sup>)<sup> 2</sup>
+					</td>
+				</tr>
+				<tr>
+					<td>8 &times; (9.1094 &times; 10<sup>-28</sup>g) &times; L<sup> 2</sup></td>
+				</tr>
+			</div>
+			<div>
+				<!-- results -->
+				<tr>
+					<td class="left" rowspan="2">=&nbsp;&nbsp;</td>
+					<td rowspan="2" style="text-align: left"><span id="result"></span> &times; 10<sup id="exponentVal">-54</sup>
+						cm<sup>4</sup>gs<sup>-1</sup></td>
+				</tr>
+			</div>
+			<tfoot>
+				<tr>
+					<td colspan="2"><i style="color: grey">* change the values for n and h above to compute E</i></td>
+				</tr>
+			</tfoot>
+		</table>
+	</main>
+	<script>
+		(function () {
+			var inputN = document.getElementById('inputN');
+			var inputH = document.getElementById('inputH');
+			var resultContainer = document.getElementById('result');
+			var exponentContainer = document.getElementById('exponentVal');
+
+			// n, planck's constant, mass of electron
+			var n = 1, h = 6.6261, me = 9.1094;
+
+			// function to calculate and update the value for E
+			var updateResult = function () {
+				let result = (n * n * h * h) / (8 * me);
+				exponentContainer.innerText = -28 - 34 - 34; // exponent for electron + 2 * exponent for h
+				resultContainer.innerText = result;
+			}
+			// initialise result using default values
+			updateResult();
+
+			// check for changes in input value of n
+			inputN.addEventListener('input', function (event) {
+				console.log(event.target.value);
+				n = event.target.value;
+				updateResult();
+			});
+
+			// check for changes in input value of h
+			inputH.addEventListener('input', function (event) {
+				console.log(event.target.value);
+				h = event.target.value;
+				updateResult();
+			});
+
+		})();
+	</script>
+</body>
+
+</html>
